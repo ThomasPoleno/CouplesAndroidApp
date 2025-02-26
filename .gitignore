@@ -13,3 +13,20 @@
 .externalNativeBuild
 .cxx
 local.properties
+
+# Ignore Android Studio files
+.idea/
+*.iml
+
+# Ignore build files
+/build
+/app/build
+
+# Ignore local properties
+local.properties
+
+# Ignore unnecessary files
+*.log
+*.keystore
+*.gradle
+
