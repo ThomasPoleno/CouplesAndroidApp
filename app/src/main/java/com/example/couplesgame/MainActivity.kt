@@ -1,6 +1,7 @@
 package com.example.couplesgame
 
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.os.Bundle
 import android.view.Gravity
 import android.widget.Button
@@ -9,10 +10,12 @@ import androidx.appcompat.app.AppCompatActivity
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var gameView: GameView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val gameView = GameView(this)
+        gameView = GameView(this)
         val tracker = AnniversaryTracker(this)
 
         // Create a FrameLayout to hold both the game and the button
@@ -28,7 +31,7 @@ class MainActivity : AppCompatActivity() {
             FrameLayout.LayoutParams.WRAP_CONTENT, // Width = Wrap Content
             FrameLayout.LayoutParams.WRAP_CONTENT  // Height = Wrap Content
         ).apply {
-            gravity = Gravity.BOTTOM
+            gravity = Gravity.CENTER
         }
 
         // Set button click listener to open date picker
@@ -36,8 +39,26 @@ class MainActivity : AppCompatActivity() {
             showDatePicker(tracker, gameView)
         }
 
+        val loveNoteButton = Button(this)
+        loveNoteButton.text = "Love Notes"
+
+        loveNoteButton.layoutParams = FrameLayout.LayoutParams(
+            FrameLayout.LayoutParams.WRAP_CONTENT,
+            FrameLayout.LayoutParams.WRAP_CONTENT
+        ).apply {
+            gravity = Gravity.CENTER
+            topMargin = 150
+        }
+
+        loveNoteButton.setOnClickListener {
+            val intent = Intent(this, LoveNotesActivity::class.java)
+            startActivity(intent)
+        }
+
         // Add the button to the layout
         frameLayout.addView(setDateButton)
+
+        frameLayout.addView(loveNoteButton)
 
         // Set the FrameLayout as the root view
         setContentView(frameLayout)
@@ -62,5 +83,11 @@ class MainActivity : AppCompatActivity() {
             calendar.get(Calendar.DAY_OF_MONTH)
         )
         datePicker.show()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        gameView.invalidate() // ✅ This forces the screen to redraw
+        gameView.requestLayout() // ✅ Ensures the layout is refreshed
     }
 }

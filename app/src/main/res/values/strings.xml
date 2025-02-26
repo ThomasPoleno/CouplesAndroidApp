@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">CouplesGame</string>
+    <string name="title_activity_love_notes">LoveNotesActivity</string>
 </resources>

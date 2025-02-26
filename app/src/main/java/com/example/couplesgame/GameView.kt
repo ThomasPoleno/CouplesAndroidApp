@@ -36,6 +36,10 @@ class GameView(context: Context) : SurfaceView(context), SurfaceHolder.Callback 
         // Game logic updates here
     }
 
+    fun resume() {
+        invalidate()
+    }
+
     override fun draw(canvas: Canvas) {
         super.draw(canvas)
         canvas.drawColor(Color.WHITE) // Background color
@@ -67,14 +71,12 @@ class GameView(context: Context) : SurfaceView(context), SurfaceHolder.Callback 
         roofPath.close()
         canvas.drawPath(roofPath, roofPaint)
 
-        //old
         val textPaint = Paint()
 
-        textPaint.color = Color.RED
+        textPaint.color = Color.BLACK
         textPaint.textSize = 40f
         textPaint.textAlign = Paint.Align.CENTER
 
-        //canvas.drawCircle(100f, 100f, 50f, paint) //test drawing a circle
         canvas.drawText(anniversaryTracker.getTimeSinceAnniversary(), screenWidth / 2, houseTop - 350, textPaint)
     }
 }

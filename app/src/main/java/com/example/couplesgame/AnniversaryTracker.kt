@@ -38,7 +38,7 @@ class AnniversaryTracker(context: Context) {
         val today = Calendar.getInstance()
         val anniversary = getAnniversary()
 
-        // Calculate the difference in years, months, and days correctly
+        // Calculate the difference in years, months, and days
         var years = today.get(Calendar.YEAR) - anniversary.get(Calendar.YEAR)
         var months = today.get(Calendar.MONTH) - anniversary.get(Calendar.MONTH)
         var days = today.get(Calendar.DAY_OF_MONTH) - anniversary.get(Calendar.DAY_OF_MONTH)
